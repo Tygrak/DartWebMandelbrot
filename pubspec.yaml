@@ -1,0 +1,6 @@
+name: mandelbrot
+dependencies:
+  browser: '>=0.10.0'
+transformers:
+- $dart2js:
+    csp: true

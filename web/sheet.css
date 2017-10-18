@@ -1,0 +1,30 @@
+body {
+    background-color: lightblue;
+}
+
+#wrapper {
+    width: 600px;
+    margin: auto;
+    border: solid thin black;
+}
+
+#textarea {
+    color: black;
+    text-align: center;
+    font-family: verdana;
+    font-size: 20px;
+}
+
+#input {
+    margin: auto;
+    width: 600px;
+    border: solid thin black;
+    color: black;
+    font-family: verdana;
+    font-size: 14px;
+    text-align: center;
+}
+
+#input input{
+    width: 100px;
+}
