@@ -7,33 +7,40 @@
   </head>
 
   <body>
-    <p id="textarea">
-      Vector Fielder
-    </p>
-    <div id="wrapper">
-      <canvas id="canvas" width="600" height="600"></canvas>
+    <div class="sidenav">
+      <p>Maths<br>Visualizations</p>
+      <a href="/">Mandelbrot</a>
+      <a href="/vectorfield.html">Vectorfield</a>
     </div>
-    <div id="inputequation">
-      X equation (postfix): <input type="text" name="xequation" value="-y">
-      <br>
-      Y equation (postfix): <input type="text" name="yequation" value="x">
-    </div>
-    <div id="input">
-      <br>
-      X: <input type="text" name="x" value="0">
-      Y: <input type="text" name="y" value="0">
-      Zoom: <input type="text" name="zoom" value="10">
-      <br><br>
-      Timescale: <input type="text" name="timescale" value="0.1">
-      Points: <input type="text" name="points" value="300">
-      Point Size: <input type="text" name="pointsize" value="2">
-      <br><br>
-      Background color: <input type="text" name="backgroundcolor" value="173, 217, 230">
-      Points color: <input type="text" name="pointscolor" value="4, 4, 38">
-      Fade: <input type="text" name="fadealpha" value="0.05">
-      <br><br>
-      <button id="regeneratebutton">Regenerate</button>
-      <br>
+    <div class="main">
+      <p id="textarea">
+        Vector Fielder
+      </p>
+      <div id="wrapper">
+        <canvas id="canvas" width="600" height="600"></canvas>
+      </div>
+      <div id="inputequation">
+        X equation (postfix): <input type="text" name="xequation" value="-y">
+        <br>
+        Y equation (postfix): <input type="text" name="yequation" value="x">
+      </div>
+      <div id="input">
+        <br>
+        X: <input type="text" name="x" value="0">
+        Y: <input type="text" name="y" value="0">
+        Zoom: <input type="text" name="zoom" value="10">
+        <br><br>
+        Timescale: <input type="text" name="timescale" value="0.1">
+        Points: <input type="text" name="points" value="300">
+        Point Size: <input type="text" name="pointsize" value="2">
+        <br><br>
+        Background color: <input type="text" name="backgroundcolor" value="173, 217, 230">
+        Points color: <input type="text" name="pointscolor" value="4, 4, 38">
+        Fade: <input type="text" name="fadealpha" value="0.05">
+        <br><br>
+        <button id="regeneratebutton">Regenerate</button>
+        <br>
+      </div>
     </div>
     <script type="application/dart" src="vectorfield.dart"></script>
     <script src="packages/browser/dart.js"></script>

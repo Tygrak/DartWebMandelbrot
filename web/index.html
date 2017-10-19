@@ -7,20 +7,27 @@
   </head>
 
   <body>
-    <p id="textarea">
-      Mandelbrot
-    </p>
-    <div id="wrapper">
-      <canvas id="canvas" width="600" height="600"></canvas>
+    <div class="sidenav">
+      <p>Maths<br>Visualizations</p>
+      <a href="/">Mandelbrot</a>
+      <a href="/vectorfield.html">Vectorfield</a>
     </div>
-    <div id="input">
-      R: <input type="text" name="x" value="-0.5">
-      I: <input type="text" name="y" value="0">
-      Zoom: <input type="text" name="zoom" value="2">
-      <br><br>
-      <button id="calculatebutton">Go To</button>
-      <br><br>
-      Iterations: <input type="text" name="iterations" value="400">
+    <div class="main">
+      <p id="textarea">
+        Mandelbrot
+      </p>
+      <div id="wrapper">
+        <canvas id="canvas" width="600" height="600"></canvas>
+      </div>
+      <div id="input">
+        R: <input type="text" name="x" value="-0.5">
+        I: <input type="text" name="y" value="0">
+        Zoom: <input type="text" name="zoom" value="2">
+        <br><br>
+        <button id="calculatebutton">Go To</button>
+        <br><br>
+        Iterations: <input type="text" name="iterations" value="400">
+      </div>
     </div>
     <script type="application/dart" src="main.dart"></script>
     <script src="packages/browser/dart.js"></script>

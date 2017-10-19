@@ -27,7 +27,6 @@ void main() {
   button = querySelector("#regeneratebutton");
   button.addEventListener("click", Regenerate);
   GeneratePoints(300);
-  print(GetEquationValue(new Point(2, 2), "-y sin"));
   Run();
 }
 
@@ -160,6 +159,10 @@ double GetEquationValue(Point p, String equation){
       } else{
         stack.add(0);
       }
+    } else if (values[i] == "floor"){
+      stack.add((stack.removeLast()).floorToDouble());
+    } else if (values[i] == "ceil"){
+      stack.add((stack.removeLast()).ceilToDouble());
     } else if (values[i] == "pi"){
       stack.add(PI);
     } else if (values[i] == "e"){
