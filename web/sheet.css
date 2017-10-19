@@ -15,7 +15,7 @@ body {
     font-size: 20px;
 }
 
-#input {
+#input, #inputequation {
     margin: auto;
     width: 600px;
     border: solid thin black;
@@ -26,5 +26,9 @@ body {
 }
 
 #input input{
-    width: 100px;
+    width: 90px;
+}
+
+#inputequation input{
+    width: 200px;
 }
