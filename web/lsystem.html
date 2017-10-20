@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="sheet.css">
+    <title>L-Systems</title>
+  </head>
+
+  <body>
+    <div class="sidenav">
+      <p>Maths<br>Visualizations</p>
+      <a href="/">Mandelbrot</a>
+      <a href="/vectorfield.html">Vectorfield</a>
+      <a href="/lsystem.html">LSystem</a>
+    </div>
+    <div class="main">
+      <p id="textarea">
+        L-Systems
+      </p>
+      <div id="wrapper">
+        <canvas id="canvas" width="600" height="600"></canvas>
+      </div>
+      <div id="inputequation">
+        Axiom: <input type="text" name="axiom" value="A">
+        <br>
+        Rule1: <input type="text" name="rule1" value="A = B T-60 A T-60 B">
+        Rule2: <input type="text" name="rule2" value="B = A T60 B T60 A">
+        <br>
+        Rule3: <input type="text" name="rule3" value="">
+        Rule4: <input type="text" name="rule4" value="">
+      </div>
+      <div id="input">
+        Iterations: <input type="text" name="iterations" value="8">
+        StartX: <input type="text" name="startx" value="560">
+        StartY: <input type="text" name="starty" value="560">
+        <br>
+        StartRotation: <input type="text" name="startrot" value="180">
+        Const1: <input type="text" name="const1" value="A = F2">
+        Const2: <input type="text" name="const2" value="B = F2">
+        <br>
+        Background color: <input type="text" name="backgroundcolor" value="173, 217, 230">
+        Foreground color: <input type="text" name="foregroundcolor" value="4, 4, 38">
+        <button id="regeneratebutton">Regenerate</button>
+      </div>
+    </div>
+    <script type="application/dart" src="lsystem.dart"></script>
+    <script src="packages/browser/dart.js"></script>
+  </body>
+</html>

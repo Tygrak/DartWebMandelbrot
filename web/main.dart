@@ -21,7 +21,6 @@ class Complex {
 }
 
 void main() {
-  querySelector("#textarea").text = "Mandelbrot Set";
   canvas = querySelector("#canvas");
   button = querySelector("#calculatebutton");
   canvas.onClick.listen(CanvasClicked);

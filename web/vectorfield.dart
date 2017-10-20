@@ -20,8 +20,7 @@ String backgroundColor = "173, 217, 230";
 String pointsColor = "4, 4, 38";
 double fadealpha = 0.05;
 
-void main() {
-  querySelector("#textarea").text = "Vector Fielder";
+void main(){
   canvas = querySelector("#canvas");
   ctx = canvas.getContext("2d");
   button = querySelector("#regeneratebutton");
@@ -163,6 +162,8 @@ double GetEquationValue(Point p, String equation){
       stack.add((stack.removeLast()).floorToDouble());
     } else if (values[i] == "ceil"){
       stack.add((stack.removeLast()).ceilToDouble());
+    } else if (values[i] == "round"){
+      stack.add((stack.removeLast()).roundToDouble());
     } else if (values[i] == "pi"){
       stack.add(PI);
     } else if (values[i] == "e"){
