@@ -145,8 +145,7 @@ void DrawSystem(List<String> generated){
     } else if (generated[j] == "["){
       positions.add(new Point(new Point(xPos, yPos), rotation));
     } else if (generated[j] == "]"){
-      Point p = positions.removeFirst();
-      print(p);
+      Point p = positions.removeLast();
       xPos = p.x.x;
       yPos = p.x.y;
       rotation = p.y;
