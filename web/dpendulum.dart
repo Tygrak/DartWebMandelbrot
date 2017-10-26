@@ -59,6 +59,8 @@ void Move(){
   theta2 += dtheta2*timeScale;
   avelocity1 += davelocity1*timeScale;
   avelocity2 += davelocity2*timeScale;
+  avelocity1 *= 0.999;
+  avelocity2 *= 0.999;
 }
 
 void Regenerate(e){

@@ -25,11 +25,25 @@
       <div id="input">
         R: <input type="text" name="x" value="-0.5">
         I: <input type="text" name="y" value="0">
-        Zoom: <input type="text" name="zoom" value="2">
+        Zoom: <input type="text" name="zoom" value="4">
         <br><br>
         <button id="calculatebutton">Go To</button>
+        <br>
+        <button id="redrawbutton">Redraw</button>
         <br><br>
         Iterations: <input type="text" name="iterations" value="400">
+        Auto Iterations:<input type="checkbox" name="autoIterations" checked="checked">
+        <br>
+        Auto Iterations Accuracy: <input type="text" name="autoIterationsGrowth" value="1.6">
+        <br><br>
+        Color Scheme:
+        <select name="colorscheme">
+          <option value="color1">Colored 1</option>
+          <option value="color2">Colored 2 Purple</option>
+          <option value="color3">Colored 3 HSL</option>
+          <option value="color4">Colored 4 HSL2</option>
+          <option value="grayscale">Grayscale</option>
+        </select>
       </div>
     </div>
     <script type="application/dart" src="main.dart"></script>
