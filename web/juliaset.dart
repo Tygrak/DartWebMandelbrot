@@ -6,7 +6,9 @@ ButtonElement button;
 ButtonElement redrawButton;
 CanvasRenderingContext2D ctx;
 int colorMode = 1;
-double r = -0.5;
+double juliar = -1.15;
+double juliai = 0.3;
+double r = 0.0;
 double i = 0.0;
 double zoom = 4.0;
 bool autoIterations = true;
@@ -69,6 +71,10 @@ void Regenerate(){
   autoIterations = element.checked;
   element = querySelector("[name=autoIterationsGrowth]");
   autoIterationsAccuracy = double.parse(element.value);
+  element = querySelector("[name=juliax]");
+  juliar = double.parse(element.value);
+  element = querySelector("[name=juliay]");
+  juliai = double.parse(element.value);
 }
 
 void ButtonClicked(e){
@@ -104,8 +110,8 @@ void DrawSet(double start_x, double start_y, double zoom){
 
   for (var x = 0; x < canvas.width; x++){
     for (var y = 0; y < canvas.height; y++){
-      Complex c = new Complex(start_x+step_x*x,start_y+step_y*y);
-      Complex z = new Complex(0.0, 0.0);
+      Complex c = new Complex(juliar, juliai);
+      Complex z = new Complex(start_x+step_x*x, start_y+step_y*y);
       int i = 0;
       for (i = 0; i < iterations; i++){
         z = z*(z)+c;
