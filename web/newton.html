@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8" />
     <link rel="stylesheet" type="text/css" href="sheet.css">
-    <title>Mandelbrot Set Explorer</title>
+    <title>Newton Fractal Explorer</title>
   </head>
 
   <body>
@@ -19,13 +19,15 @@
     </div>
     <div class="main">
       <p id="textarea">
-        Mandelbrot Set
+        Newton Fractal
       </p>
       <div id="wrapper">
         <canvas id="canvas" width="600" height="600"></canvas>
       </div>
       <div id="input">
-        R: <input type="text" name="x" value="-0.5">
+        GeneralizedA: <input type="text" name="a" value="1">
+        <br><br>
+        R: <input type="text" name="x" value="0">
         I: <input type="text" name="y" value="0">
         Zoom: <input type="text" name="zoom" value="4">
         <br><br>
@@ -33,11 +35,8 @@
         <br>
         <button id="redrawbutton">Redraw</button>
         <br><br>
-        Iterations: <input type="text" name="iterations" value="400">
-        Auto Iterations:<input type="checkbox" name="autoIterations" checked="checked">
+        Iterations: <input type="text" name="iterations" value="100">
         <br>
-        Auto Iterations Accuracy: <input type="text" name="autoIterationsGrowth" value="1.6">
-        <br><br>
         Color Scheme:
         <select name="colorscheme">
           <option value="color1">Colored 1</option>
@@ -48,7 +47,7 @@
         </select>
       </div>
     </div>
-    <script type="application/dart" src="main.dart"></script>
+    <script type="application/dart" src="newton.dart"></script>
     <script src="packages/browser/dart.js"></script>
   </body>
 </html>

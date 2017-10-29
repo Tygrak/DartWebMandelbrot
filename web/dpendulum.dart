@@ -1,6 +1,5 @@
 import 'dart:html';
 import 'dart:math';
-import 'dart:collection';
 
 CanvasElement canvas;
 ButtonElement button;
