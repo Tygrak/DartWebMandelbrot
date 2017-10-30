@@ -7,12 +7,11 @@ ButtonElement button;
 ButtonElement redrawButton;
 CanvasRenderingContext2D ctx;
 int colorMode = 1;
+int newtonFunction = 1;
 double r = 0.0;
 double i = 0.0;
 double zoom = 4.0;
 double a = 1.0;
-String newtonFunction = "z pow3 1 -";
-String newtonDerivate = "z pow2 3 *";
 List<Complex> roots = new List<Complex>();
 
 int lX = 0;
@@ -95,6 +94,24 @@ void Regenerate(){
   } else if (selectElement.value == "color4"){
     colorMode = 4;
   }
+  selectElement = querySelector("[name=newtonfunction]");
+  if (selectElement.value == "func1"){
+    newtonFunction = 1;
+  } else if (selectElement.value == "func2"){
+    newtonFunction = 2;
+  } else if (selectElement.value == "func3"){
+    newtonFunction = 3;
+  } else if (selectElement.value == "func4"){
+    newtonFunction = 4;
+  } else if (selectElement.value == "func5"){
+    newtonFunction = 5;
+  } else if (selectElement.value == "func6"){
+    newtonFunction = 6;
+  } else if (selectElement.value == "func7"){
+    newtonFunction = 7;
+  } else if (selectElement.value == "func8"){
+    newtonFunction = 8;
+  }
   lX = 0;
 }
 
@@ -107,10 +124,6 @@ void ButtonClicked(e){
   zoom = double.parse(element.value);
   element = querySelector("[name=a]");
   a = double.parse(element.value);
-  element = querySelector("[name=newton]");
-  newtonFunction = element.value;
-  element = querySelector("[name=newtonderivate]");
-  newtonDerivate = element.value;
   roots = new List<Complex>();
   RedrawButtonClicked("e");
 }
@@ -146,9 +159,34 @@ void DrawSet(double start_x, double start_y, double zoom){
     for (var y = 0; y < canvas.height; y++){
       Complex z = new Complex(start_x+step_x*x, start_y+step_y*y);
       int i = 0;
-      for (i = 0; i < iterations; i++){
-        z = z-(((z*z*z*z*z*z)-new Complex(1.0, 0.0))/(z*z*z*z*z*new Complex(5.0, 0.0))).timesConst(a);
-        //z = z-((GetEquationValue(z, newtonFunction))/(GetEquationValue(z, newtonDerivate))).timesConst(a);
+      if (newtonFunction == 1){
+        for (i = 0; i < iterations; i++){
+          z = z-(((z*z*z)-new Complex(1.0, 0.0))/(z*z*new Complex(3.0, 0.0))).timesConst(a);
+        }
+      } else if (newtonFunction == 2){
+        for (i = 0; i < iterations; i++){
+          z = z-(((z*z*z*z)-new Complex(1.0, 0.0))/(z*z*z*new Complex(4.0, 0.0))).timesConst(a);
+        }
+      }  else if (newtonFunction == 3){
+        for (i = 0; i < iterations; i++){
+          z = z-(((z*z*z*z*z)-new Complex(1.0, 0.0))/(z*z*z*z*new Complex(5.0, 0.0))).timesConst(a);
+        }
+      } else if (newtonFunction == 4){
+        for (i = 0; i < iterations; i++){
+          z = z-(((z*z*z*z*z*z)-new Complex(1.0, 0.0))/(z*z*z*z*z*new Complex(6.0, 0.0))).timesConst(a);
+        }
+      } else if (newtonFunction == 5){
+        for (i = 0; i < iterations; i++){
+          z = z-(((z*z*z*z)-(z*z).timesConst(4)-new Complex(1.0, 0.0))/((z*z*z).timesConst(4)-(z).timesConst(8))).timesConst(a);
+        }
+      } else if (newtonFunction == 6){
+        for (i = 0; i < iterations; i++){
+          z = z-(((z*z*z*z*z)-(z*z*z).timesConst(2)-(z*z).timesConst(4)-new Complex(1.0, 0.0))/((z*z*z*z).timesConst(5)-(z*z).timesConst(6)-(z).timesConst(8))).timesConst(a);
+        }
+      } else if (newtonFunction == 7){
+        for (i = 0; i < iterations; i++){
+          z = z-(((z*z*z).timesConst(3)-(z*z).timesConst(6)-new Complex(1.0, 0.0))/((z*z).timesConst(9)-(z).timesConst(12))).timesConst(a);
+        }
       }
       z = new Complex((z.r*100).floor()/100, (z.i*100).floor()/100);
       if (z.r == 0 && z.i == 0){
