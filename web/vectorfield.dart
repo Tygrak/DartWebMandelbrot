@@ -76,7 +76,9 @@ void UpdateField(num time){
     for (var i = 0; i < points.length; i++){
       double pointx = points[i].x + ((GetEquationValue(points[i], xEquation))*timeScale*1/delta);
       double pointy = points[i].y + ((GetEquationValue(points[i], yEquation))*timeScale*1/delta);
-      points[i] = new Point(pointx, pointy);
+      if (!pointx.isInfinite && !pointx.isNaN && !pointy.isInfinite && !pointy.isNaN){
+        points[i] = new Point(pointx, pointy);
+      }
       int pX = Map(points[i].x, x-zoom/2, x+zoom/2, 0.0, canvas.width as double).toInt();
       int pY = Map(points[i].y, y-zoom/2, y+zoom/2, 0.0, canvas.height as double).toInt();
       ctx.fillStyle = "rgb($pointsColor)";
@@ -113,7 +115,7 @@ double GetEquationValue(Point p, String equation){
       stack.add(p.x);
     } else if (values[i] == "-x"){
       stack.add(-p.x);
-    } else if (values[i] == "x"){
+    } else if (values[i] == "y"){
       stack.add(p.y);
     } else if (values[i] == "-y"){
       stack.add(-p.y);
@@ -129,6 +131,9 @@ double GetEquationValue(Point p, String equation){
     } else if (values[i] == "/"){
       double last = stack.removeLast();
       stack.add(stack.removeLast()/last);
+    } else if (values[i] == "%"){
+      double last = stack.removeLast();
+      stack.add(stack.removeLast()%last);
     } else if (values[i] == "sin"){
       stack.add(sin(stack.removeLast()));
     } else if (values[i] == "cos"){

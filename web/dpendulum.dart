@@ -13,8 +13,6 @@ num lastTimeStamp = 0;
 int pointSize = 2;
 int drawLine = 0;
 Random rand = new Random();
-String xEquation = "-y";
-String yEquation = "x";
 String backgroundColor = "173, 217, 230";
 String pointsColor = "4, 4, 38";
 double fadealpha = 0.05;
@@ -87,7 +85,7 @@ void Regenerate(e){
   backgroundColor = element.value;
   element = querySelector("[name=pointscolor]");
   pointsColor = element.value;
-  ctx.fillStyle = "rgba($backgroundColor)";
+  ctx.fillStyle = "rgb($backgroundColor)";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 }
 
@@ -109,6 +107,8 @@ void Update(num time){
     ctx.fillStyle = "rgb($pointsColor)";
     ctx.fillRect(pX-pointSize~/2, pY-pointSize~/2, pointSize, pointSize);
     ctx.beginPath();
+    ctx.strokeStyle = "rgb($pointsColor)";
+    ctx.lineWidth = pointSize;
     ctx.moveTo(pX, pY);
     pointx = (cos(theta1-4.712389)*length1);
     pointy = (sin(theta1-4.712389)*length1);

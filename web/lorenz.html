@@ -3,7 +3,7 @@
 <html>
   <head>
     <link rel="stylesheet" type="text/css" href="sheet.css">
-    <title>Double Pendulums</title>
+    <title>Lorenz Systems</title>
   </head>
 
   <body>
@@ -19,35 +19,43 @@
     </div>
     <div class="main">
       <p id="textarea">
-        Double Pendulums
+        Lorenz Systems
       </p>
       <div id="wrapper">
         <canvas id="canvas" width="600" height="600"></canvas>
       </div>
       <div id="input">
         <br>
-        Angle1: <input type="text" name="angle1" value="10">
-        Angle2: <input type="text" name="angle2" value="-10">
+        Ro: <input type="text" name="ro" value="28">
+        Omega: <input type="text" name="omega" value="10">
+        Beta: <input type="text" name="beta" value="2.6666">
         <br>
-        Mass1: <input type="text" name="mass1" value="1">
-        Mass2: <input type="text" name="mass2" value="1">
-        <br>
-        Length1: <input type="text" name="length1" value="1">
-        Length2: <input type="text" name="length2" value="1">
+        StartX: <input type="text" name="startx" value="0.1">
+        StartY: <input type="text" name="starty" value="0.1">
+        StartZ: <input type="text" name="startz" value="0.1">
         <br><br>
-        Timescale: <input type="text" name="timescale" value="0.02">
-        Point Size: <input type="text" name="pointsize" value="10">
+        Zoom: <input type="text" name="zoom" value="100.0">
+        Dimensions:
+        <select name="dimensions">
+          <option value="xy">XY</option>
+          <option value="xz">XZ</option>
+          <option value="yz">YZ</option>
+        </select>
+        <br>
+        Timescale: <input type="text" name="timescale" value="0.01">
+        Point Size: <input type="text" name="pointsize" value="1">
         Draw Line: <input type="text" name="drawline" value="1">
         <br><br>
         Background color: <input type="text" name="backgroundcolor" value="173, 217, 230">
         Points color: <input type="text" name="pointscolor" value="4, 4, 38">
-        Fade: <input type="text" name="fadealpha" value="0.05">
+        Fade: <input type="text" name="fadealpha" value="0.001">
         <br><br>
         <button id="regeneratebutton">Regenerate</button>
+        <button id="restartbutton">Restart</button>
         <br>
       </div>
     </div>
-    <script type="application/dart" src="dpendulum.dart"></script>
+    <script type="application/dart" src="lorenz.dart"></script>
     <script src="packages/browser/dart.js"></script>
   </body>
 </html>
