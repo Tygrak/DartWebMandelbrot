@@ -50,9 +50,25 @@ class Complex {
   Complex timesConst (num constant){
     return new Complex(r*constant, i*constant);
   }
-    
+  Complex sin (){
+    return (Pow(E, new Complex(0.0, 1.0)*this)-Pow(E, new Complex(0.0, -1.0)*this))/(new Complex(0.0, 1.0).timesConst(2));
+  }
+  Complex cos (){
+    return (Pow(E, new Complex(0.0, 1.0)*this)+Pow(E, new Complex(0.0, -1.0)*this))/(new Complex(1.0, 0.0).timesConst(2));
+  }
   double abs() => r*r+i*i;
 }
+
+Complex Pow(double n, Complex toPow){
+  //12^(3 + 2 I) = 1728 cos(2 log(12)) + 1728 i sin(2 log(12))
+  return new Complex(cos(toPow.i * log(n)), sin(toPow.i * log(n))).timesConst(pow(n, toPow.r));
+}
+
+/*Complex Pow(double n, Complex toPow){
+  Complex rotated = new Complex(cos(toPow.i)*n, sin(toPow.i)*n);
+  rotated = rotated.pow(toPow.r.toInt());
+  return rotated;
+}*/
 
 void main() {
   canvas = querySelector("#canvas");
@@ -62,6 +78,8 @@ void main() {
   button.addEventListener("click", ButtonClicked);
   redrawButton.addEventListener("click", RedrawButtonClicked);
   ctx = canvas.getContext("2d");
+  print("e**(pi*i) = ${Pow(E, new Complex(0.0, PI))}");
+  print("sin(2+i) = ${new Complex(2.0, 1.0).sin()}");
   Run();
 }
 
@@ -111,6 +129,8 @@ void Regenerate(){
     newtonFunction = 7;
   } else if (selectElement.value == "func8"){
     newtonFunction = 8;
+  } else if (selectElement.value == "func9"){
+    newtonFunction = 9;
   }
   lX = 0;
 }
@@ -157,6 +177,7 @@ void DrawSet(double start_x, double start_y, double zoom){
   int iterations = int.parse(element.value);
   for (var x = lX; x < canvas.width; x++){
     for (var y = 0; y < canvas.height; y++){
+      try {
       Complex z = new Complex(start_x+step_x*x, start_y+step_y*y);
       int i = 0;
       if (newtonFunction == 1){
@@ -187,6 +208,14 @@ void DrawSet(double start_x, double start_y, double zoom){
         for (i = 0; i < iterations; i++){
           z = z-(((z*z*z).timesConst(3)-(z*z).timesConst(6)-new Complex(1.0, 0.0))/((z*z).timesConst(9)-(z).timesConst(12))).timesConst(a);
         }
+      } else if (newtonFunction == 8){
+        for (i = 0; i < iterations; i++){
+          z = z-((z.sin())/(z.cos()));
+        }
+      } else if (newtonFunction == 9){
+        for (i = 0; i < iterations; i++){
+          z = z-((z.cos())/(z.sin().timesConst(-1)));
+        }
       }
       z = new Complex((z.r*100).floor()/100, (z.i*100).floor()/100);
       if (z.r == 0 && z.i == 0){
@@ -210,6 +239,8 @@ void DrawSet(double start_x, double start_y, double zoom){
         }
       }
       ctx.fillRect(x, y, 1, 1); //hsl(195, 53%, 79%)
+      } catch (e){
+      }
     }
     if (lX < x-1){
       lX = x;

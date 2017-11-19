@@ -16,7 +16,7 @@ Random rand = new Random();
 String backgroundColor = "173, 217, 230";
 String pointsColor = "4, 4, 38";
 double fadealpha = 0.05;
-int drawLine = 1;
+num drawLine = 1;
 int dimensions = 1;
 
 double ro = 28.0;
@@ -63,7 +63,7 @@ void Regenerate(e){
   element = querySelector("[name=pointsize]");
   pointSize = int.parse(element.value);
   element = querySelector("[name=drawline]");
-  drawLine = int.parse(element.value);
+  drawLine = num.parse(element.value);
   element = querySelector("[name=fadealpha]");
   fadealpha = double.parse(element.value);
   element = querySelector("[name=backgroundcolor]");
@@ -129,7 +129,7 @@ void Update(num time){
     }
     ctx.fillStyle = "rgb($pointsColor)";
     ctx.strokeStyle = "rgb($pointsColor)";
-    ctx.lineWidth = pointSize;
+    ctx.lineWidth = pointSize * drawLine;
     ctx.fillRect(pX-pointSize~/2, pY-pointSize~/2, pointSize, pointSize);
     ctx.lineTo(pX, pY);
     ctx.closePath();
