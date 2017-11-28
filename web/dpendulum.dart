@@ -1,5 +1,6 @@
 import 'dart:html';
 import 'dart:math';
+import 'mathextensions.dart';
 
 CanvasElement canvas;
 ButtonElement button;
@@ -102,8 +103,8 @@ void Update(num time){
     Move();
     double pointx = 0.0;
     double pointy = 0.0;
-    int pX = Map(pointx, x-zoom/2, x+zoom/2, 0.0, canvas.width as double).toInt();
-    int pY = Map(pointy, y-zoom/2, y+zoom/2, 0.0, canvas.height as double).toInt();
+    int pX = MapToRange(pointx, x-zoom/2, x+zoom/2, 0.0, canvas.width as double).toInt();
+    int pY = MapToRange(pointy, y-zoom/2, y+zoom/2, 0.0, canvas.height as double).toInt();
     ctx.fillStyle = "rgb($pointsColor)";
     ctx.fillRect(pX-pointSize~/2, pY-pointSize~/2, pointSize, pointSize);
     ctx.beginPath();
@@ -112,8 +113,8 @@ void Update(num time){
     ctx.moveTo(pX, pY);
     pointx = (cos(theta1-4.712389)*length1);
     pointy = (sin(theta1-4.712389)*length1);
-    pX = Map(pointx, x-zoom/2, x+zoom/2, 0.0, canvas.width as double).toInt();
-    pY = Map(pointy, y-zoom/2, y+zoom/2, 0.0, canvas.height as double).toInt();
+    pX = MapToRange(pointx, x-zoom/2, x+zoom/2, 0.0, canvas.width as double).toInt();
+    pY = MapToRange(pointy, y-zoom/2, y+zoom/2, 0.0, canvas.height as double).toInt();
     ctx.fillStyle = "rgb($pointsColor)";
     ctx.fillRect(pX-pointSize~/2, pY-pointSize~/2, pointSize, pointSize);
     ctx.lineTo(pX, pY);
@@ -123,8 +124,8 @@ void Update(num time){
     ctx.moveTo(pX, pY);
     pointx = pointx + (cos(theta2-4.712389)*length2);
     pointy = pointy + (sin(theta2-4.712389)*length2);
-    pX = Map(pointx, x-zoom/2, x+zoom/2, 0.0, canvas.width as double).toInt();
-    pY = Map(pointy, y-zoom/2, y+zoom/2, 0.0, canvas.height as double).toInt();
+    pX = MapToRange(pointx, x-zoom/2, x+zoom/2, 0.0, canvas.width as double).toInt();
+    pY = MapToRange(pointy, y-zoom/2, y+zoom/2, 0.0, canvas.height as double).toInt();
     ctx.fillStyle = "rgb($pointsColor)";
     ctx.fillRect(pX-pointSize~/2, pY-pointSize~/2, pointSize, pointSize);
     ctx.lineTo(pX, pY);
@@ -132,12 +133,4 @@ void Update(num time){
     if (drawLine != 0) ctx.stroke();
   }
   Run();
-}
-
-double Map(double value, double min1, double max1, double min2, double max2){
-  if (max1-min1 != 0){
-    value = (value-min1)/(max1-min1) * (max2-min2) + min2;
-    return value;
-  }
-  throw new Exception("Map min1 and max1 are equal!");
 }

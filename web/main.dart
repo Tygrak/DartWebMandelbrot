@@ -1,5 +1,6 @@
 import 'dart:html';
 import 'dart:math';
+import 'mathextensions.dart';
 
 CanvasElement canvas;
 ButtonElement button;
@@ -11,19 +12,7 @@ double i = 0.0;
 double zoom = 4.0;
 bool autoIterations = true;
 double autoIterationsAccuracy = 1.6;
-
-class Complex {
-  double _r,_i;
- 
-  Complex(this._r,this._i);
-  double get r => _r;
-  double get i => _i;
-  String toString() => "($r,$i)";
- 
-  Complex operator +(Complex other) => new Complex(r+other.r,i+other.i);
-  Complex operator *(Complex other) => new Complex(r*other.r-i*other.i,r*other.i+other.r*i);
-  double abs() => r*r+i*i;
-}
+int complexFunction = 1;
 
 void main() {
   canvas = querySelector("#canvas");
@@ -78,6 +67,24 @@ void ButtonClicked(e){
   i = double.parse(element.value);
   element = querySelector("[name=zoom]");
   zoom = double.parse(element.value);
+  SelectElement selectElement = querySelector("[name=complexfunction]");
+  if (selectElement.value == "func1"){
+    complexFunction = 1;
+  } else if (selectElement.value == "func2"){
+    complexFunction = 2;
+  } else if (selectElement.value == "func3"){
+    complexFunction = 3;
+  } else if (selectElement.value == "func4"){
+    complexFunction = 4;
+  } else if (selectElement.value == "func5"){
+    complexFunction = 5;
+  } else if (selectElement.value == "func6"){
+    complexFunction = 6;
+  } else if (selectElement.value == "func7"){
+    complexFunction = 7;
+  } else if (selectElement.value == "func8"){
+    complexFunction = 8;
+  }
   Regenerate();
   DrawSet(r-zoom/2, i-zoom/2, zoom);
 }
@@ -108,7 +115,27 @@ void DrawSet(double start_x, double start_y, double zoom){
       Complex z = new Complex(0.0, 0.0);
       int i = 0;
       for (i = 0; i < iterations; i++){
-        z = z*(z)+c;
+        if (complexFunction == 1){
+          z = (z*z+c);
+        } else if (complexFunction == 2){
+          z = (z*z*z+c);
+        } else if (complexFunction == 3){
+          z = (z*z*z*z+c);
+        } else if (complexFunction == 4){
+          z = (z*z*z*z*z+c);
+        } else if (complexFunction == 5){
+          Complex zAbs = new Complex(z.r.abs(), z.i.abs());
+          z = (zAbs*zAbs+c);
+        } else if (complexFunction == 6){
+          Complex zAbs = new Complex(z.r.abs(), z.i.abs());
+          z = (zAbs*zAbs*zAbs+c);
+        } else if (complexFunction == 7){
+          Complex zAbs = new Complex(z.r.abs(), z.i.abs());
+          z = (zAbs*zAbs*zAbs*zAbs+c);
+        } else if (complexFunction == 8){
+          Complex zAbs = new Complex(z.r.abs(), z.i.abs());
+          z = (zAbs*zAbs*z+c);
+        }
         if (z.abs()>4.2){
           break;
         }

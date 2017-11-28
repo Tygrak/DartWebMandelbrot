@@ -1,5 +1,6 @@
 import 'dart:html';
 import 'dart:math';
+import 'mathextensions.dart';
 
 CanvasElement canvas;
 ButtonElement button;
@@ -106,26 +107,26 @@ void Update(num time){
     int pX;
     int pY;
     if (dimensions == 1){
-      pX = Map(px, x-zoom/2, x+zoom/2, 0.0, canvas.width as double).toInt();
-      pY = Map(py, y-zoom/2, y+zoom/2, 0.0, canvas.height as double).toInt();
+      pX = MapToRange(px, x-zoom/2, x+zoom/2, 0.0, canvas.width as double).toInt();
+      pY = MapToRange(py, y-zoom/2, y+zoom/2, 0.0, canvas.height as double).toInt();
     } else if (dimensions == 2){
-      pX = Map(px, x-zoom/2, x+zoom/2, 0.0, canvas.width as double).toInt();
-      pY = Map(pz, y-zoom/2, y+zoom/2, 0.0, canvas.height as double).toInt();
+      pX = MapToRange(px, x-zoom/2, x+zoom/2, 0.0, canvas.width as double).toInt();
+      pY = MapToRange(pz, y-zoom/2, y+zoom/2, 0.0, canvas.height as double).toInt();
     } else if (dimensions == 3){
-      pX = Map(py, x-zoom/2, x+zoom/2, 0.0, canvas.width as double).toInt();
-      pY = Map(pz, y-zoom/2, y+zoom/2, 0.0, canvas.height as double).toInt();
+      pX = MapToRange(py, x-zoom/2, x+zoom/2, 0.0, canvas.width as double).toInt();
+      pY = MapToRange(pz, y-zoom/2, y+zoom/2, 0.0, canvas.height as double).toInt();
     }
     ctx.moveTo(pX, pY);
     Move();
     if (dimensions == 1){
-      pX = Map(px, x-zoom/2, x+zoom/2, 0.0, canvas.width as double).toInt();
-      pY = Map(py, y-zoom/2, y+zoom/2, 0.0, canvas.height as double).toInt();
+      pX = MapToRange(px, x-zoom/2, x+zoom/2, 0.0, canvas.width as double).toInt();
+      pY = MapToRange(py, y-zoom/2, y+zoom/2, 0.0, canvas.height as double).toInt();
     } else if (dimensions == 2){
-      pX = Map(px, x-zoom/2, x+zoom/2, 0.0, canvas.width as double).toInt();
-      pY = Map(pz, y-zoom/2, y+zoom/2, 0.0, canvas.height as double).toInt();
+      pX = MapToRange(px, x-zoom/2, x+zoom/2, 0.0, canvas.width as double).toInt();
+      pY = MapToRange(pz, y-zoom/2, y+zoom/2, 0.0, canvas.height as double).toInt();
     } else if (dimensions == 3){
-      pX = Map(py, x-zoom/2, x+zoom/2, 0.0, canvas.width as double).toInt();
-      pY = Map(pz, y-zoom/2, y+zoom/2, 0.0, canvas.height as double).toInt();
+      pX = MapToRange(py, x-zoom/2, x+zoom/2, 0.0, canvas.width as double).toInt();
+      pY = MapToRange(pz, y-zoom/2, y+zoom/2, 0.0, canvas.height as double).toInt();
     }
     ctx.fillStyle = "rgb($pointsColor)";
     ctx.strokeStyle = "rgb($pointsColor)";
@@ -136,12 +137,4 @@ void Update(num time){
     if (drawLine != 0) ctx.stroke();
   }
   Run();
-}
-
-double Map(double value, double min1, double max1, double min2, double max2){
-  if (max1-min1 != 0){
-    value = (value-min1)/(max1-min1) * (max2-min2) + min2;
-    return value;
-  }
-  throw new Exception("Map min1 and max1 are equal!");
 }

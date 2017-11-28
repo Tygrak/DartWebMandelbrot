@@ -1,6 +1,7 @@
 import 'dart:html';
 import 'dart:math';
 import 'dart:collection';
+import 'mathextensions.dart';
 
 CanvasElement canvas;
 ButtonElement button;
@@ -79,8 +80,8 @@ void UpdateField(num time){
       if (!pointx.isInfinite && !pointx.isNaN && !pointy.isInfinite && !pointy.isNaN){
         points[i] = new Point(pointx, pointy);
       }
-      int pX = Map(points[i].x, x-zoom/2, x+zoom/2, 0.0, canvas.width as double).toInt();
-      int pY = Map(points[i].y, y-zoom/2, y+zoom/2, 0.0, canvas.height as double).toInt();
+      int pX = MapToRange(points[i].x, x-zoom/2, x+zoom/2, 0.0, canvas.width as double).toInt();
+      int pY = MapToRange(points[i].y, y-zoom/2, y+zoom/2, 0.0, canvas.height as double).toInt();
       ctx.fillStyle = "rgb($pointsColor)";
       ctx.fillRect(pX, pY, pointSize, pointSize);
     }
@@ -90,14 +91,6 @@ void UpdateField(num time){
     }
   }
   Run();
-}
-
-double Map(double value, double min1, double max1, double min2, double max2){
-  if (max1-min1 != 0){
-    value = (value-min1)/(max1-min1) * (max2-min2) + min2;
-    return value;
-  }
-  throw new Exception("Map min1 and max1 are equal!");
 }
 
 double GetEquationValue(Point p, String equation){
