@@ -56,6 +56,10 @@ void Regenerate(){
     colorMode = 3;
   } else if (selectElement.value == "color4"){
     colorMode = 4;
+  } else if (selectElement.value == "color5"){
+    colorMode = 5;
+  } else if (selectElement.value == "color6"){
+    colorMode = 6;
   }
   InputElement element = querySelector("[name=autoIterations]");
   autoIterations = element.checked;
@@ -91,6 +95,8 @@ void ButtonClicked(e){
     complexFunction = 7;
   } else if (selectElement.value == "func8"){
     complexFunction = 8;
+  } else if (selectElement.value == "func9"){
+    complexFunction = 9;
   }
   Regenerate();
   DrawSet(r-zoom/2, i-zoom/2, zoom);
@@ -142,6 +148,8 @@ void DrawSet(double start_x, double start_y, double zoom){
         } else if (complexFunction == 8){
           Complex zAbs = new Complex(z.r.abs(), z.i.abs());
           z = (zAbs*zAbs*z+c);
+        } else if (complexFunction == 9){
+          z = (z*z+z+c);
         }
         if (z.abs()>4.2){
           break;
@@ -151,7 +159,7 @@ void DrawSet(double start_x, double start_y, double zoom){
         if (i == iterations){
           ctx.fillStyle = "black";
         } else if (i > 1){
-          int a = ((i/iterations)*255.0).toInt();
+          int a = ((i/iterations)*255.0).round();
           ctx.fillStyle = "rgb(0, $a, 98)";
         } else{
           ctx.fillStyle = "rgb(0, 0, 98)";
@@ -160,7 +168,7 @@ void DrawSet(double start_x, double start_y, double zoom){
         if (i == iterations){
           ctx.fillStyle = "rgb(0, 10, 0)";
         } else if (i > 1){
-          int a = ((i/iterations)*255.0).toInt();
+          int a = ((i/iterations)*255.0).round();
           ctx.fillStyle = "rgb(${a~/2}, 10, $a)";
         } else{
           ctx.fillStyle = "rgb(0, 10, 0)";
@@ -169,24 +177,43 @@ void DrawSet(double start_x, double start_y, double zoom){
         if (i == iterations){
           ctx.fillStyle = "hsl(360, 0%, 5%)";
         } else{
-          int a = (sin(i/(iterations/6))*360.0).toInt();
-          int b = (cos(i/(iterations/4))*100.0).toInt();
-          int c = (i/iterations*40.0).toInt();
+          int a = (sin(i/(iterations/6))*360.0).round();
+          int b = (cos(i/(iterations/4))*100.0).round();
+          int c = (i/iterations*40.0).round();
           ctx.fillStyle = "hsl(${360-a}, $b%, ${25+c}%)";
         }
       } else if (colorMode == 4){
         if (i == iterations){
           ctx.fillStyle = "hsl(180, 10%, 5%)";
         } else{
-          int a = (i/iterations*360.0).toInt();
-          int b = 10+((i/iterations)*90.0).toInt();
+          int a = (i/iterations*360.0).round();
+          int b = 10+((i/iterations)*90.0).round();
           ctx.fillStyle = "hsl($a, $b%, ${25+b~/2}%)";
+        }
+      } else if (colorMode == 5){
+        if (i == iterations){
+          ctx.fillStyle = "rgb(0, 0, 0)";
+        } else if (i > 1){
+          int a = ((i/iterations)*255.0).round();
+          ctx.fillStyle = "rgb(${a*0.85}, ${a+5}, ${a*2+30})";
+        } else{
+          ctx.fillStyle = "rgb(0, 5, 30)";
+        }
+      } else if (colorMode == 6){
+        if (i == iterations){
+          ctx.fillStyle = "rgb(0, 0, 0)";
+        } else if (i > 1){
+          int a = ((i/iterations)*255.0).round();
+          a = ((pow(i, 1.15)/1019)*585).round();
+          ctx.fillStyle = "rgb(${a*0.85}, ${a+5}, ${a*2+30})";
+        } else{
+          ctx.fillStyle = "rgb(0, 5, 30)";
         }
       } else{
         if (i == iterations){
           ctx.fillStyle = "black";
         } else{
-          int a = ((i/iterations)*200.0).toInt();
+          int a = ((i/iterations)*200.0).round();
           ctx.fillStyle = "rgb(${55+a}, ${55+a}, ${55+a})";
         }
       }
