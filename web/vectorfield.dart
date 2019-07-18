@@ -163,9 +163,9 @@ double GetEquationValue(Point p, String equation){
     } else if (values[i] == "round"){
       stack.add((stack.removeLast()).roundToDouble());
     } else if (values[i] == "pi"){
-      stack.add(PI);
+      stack.add(pi);
     } else if (values[i] == "e"){
-      stack.add(E);
+      stack.add(e);
     }
     //print(stack);
   }

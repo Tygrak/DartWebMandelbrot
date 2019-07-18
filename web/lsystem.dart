@@ -3,7 +3,7 @@ import 'dart:math';
 import 'dart:collection';
 import 'package:image/image.dart';
 
-const DEG2RAD = PI/180;
+const DEG2RAD = pi/180;
 
 CanvasElement canvas;
 ButtonElement button;
@@ -125,7 +125,7 @@ List<String> GenerateString(){
 
 void DrawSystem(List<String> generated){
   print("Drawing");
-  Queue<Point> positions = new Queue<Point>();
+  Queue<List> positions = new Queue<List>();
   int xPos = x;
   int yPos = y;
   num rotation = startrot;
@@ -143,12 +143,12 @@ void DrawSystem(List<String> generated){
         rotation = rotation % 360;
       }
     } else if (generated[j] == "["){
-      positions.add(new Point(new Point(xPos, yPos), rotation));
+      positions.add([new Point(xPos, yPos), rotation]);
     } else if (generated[j] == "]"){
-      Point p = positions.removeLast();
-      xPos = p.x.x;
-      yPos = p.x.y;
-      rotation = p.y;
+      var p = positions.removeLast();
+      xPos = p[0].x;
+      yPos = p[0].y;
+      rotation = p[1];
     }
   }
   var imageData = ctx.createImageData(image.width, image.height);

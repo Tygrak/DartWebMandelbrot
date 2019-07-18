@@ -33,7 +33,7 @@ void main() {
   button.addEventListener("click", ButtonClicked);
   redrawButton.addEventListener("click", RedrawButtonClicked);
   ctx = canvas.getContext("2d");
-  print("e**(pi*i) = ${Pow(E, new Complex(0.0, PI))}");
+  print("e**(pi*i) = ${Pow(e, new Complex(0.0, pi))}");
   print("sin(2+i) = ${new Complex(2.0, 1.0).sin()}");
   Run();
 }

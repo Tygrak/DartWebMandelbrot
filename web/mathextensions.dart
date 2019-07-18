@@ -13,7 +13,7 @@ class Complex {
   Complex operator -(Complex other) => new Complex(r-other.r,i-other.i);
   Complex operator *(Complex other) => new Complex(r*other.r-i*other.i,r*other.i+other.r*i);
   Complex operator /(Complex other) => _Divide(other);
-  bool operator ==(Complex other) => (r == other.r) && (i == other.i);
+  bool operator ==(Object other) => other is Complex && (r == other.r) && (i == other.i);
   Complex _Divide (Complex other){
     double temp = other.r*other.r + other.i*other.i;
     if (temp == 0){
@@ -33,10 +33,10 @@ class Complex {
     return new Complex(r*constant, i*constant);
   }
   Complex sin (){
-    return (Pow(E, new Complex(0.0, 1.0)*this)-Pow(E, new Complex(0.0, -1.0)*this))/(new Complex(0.0, 1.0).timesConst(2));
+    return (Pow(e, new Complex(0.0, 1.0)*this)-Pow(e, new Complex(0.0, -1.0)*this))/(new Complex(0.0, 1.0).timesConst(2));
   }
   Complex cos (){
-    return (Pow(E, new Complex(0.0, 1.0)*this)+Pow(E, new Complex(0.0, -1.0)*this))/(new Complex(1.0, 0.0).timesConst(2));
+    return (Pow(e, new Complex(0.0, 1.0)*this)+Pow(e, new Complex(0.0, -1.0)*this))/(new Complex(1.0, 0.0).timesConst(2));
   }
   double abs() => r*r+i*i;
 }
