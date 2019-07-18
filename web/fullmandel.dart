@@ -16,6 +16,7 @@ int iterationsAmount = 0;
 void main() {
   canvas = querySelector("#canvas");
   canvas.onClick.listen(CanvasClicked);
+  canvas.onContextMenu.listen(CanvasRightClicked);
   ctx = canvas.getContext("2d");
   if (Uri.base.queryParameters['c'] != "" && Uri.base.queryParameters['c'] != null){
     print("Colormode: ${Uri.base.queryParameters['c']}");
@@ -25,9 +26,17 @@ void main() {
     print("Function: ${Uri.base.queryParameters['f']}");
     complexFunction = int.parse(Uri.base.queryParameters['f']);
   }
+  if (Uri.base.queryParameters['iter'] != "" && Uri.base.queryParameters['iter'] != null){
+    print("Iterations: ${Uri.base.queryParameters['iter']}");
+    iterationsAmount = int.parse(Uri.base.queryParameters['iter']);
+  }
+  if (Uri.base.queryParameters['r'] != "" && Uri.base.queryParameters['r'] != null){
+    print("r: ${Uri.base.queryParameters['r']}");
+    r = double.parse(Uri.base.queryParameters['r']);
+  }
   if (Uri.base.queryParameters['i'] != "" && Uri.base.queryParameters['i'] != null){
-    print("Function: ${Uri.base.queryParameters['i']}");
-    iterationsAmount = int.parse(Uri.base.queryParameters['i']);
+    print("i: ${Uri.base.queryParameters['i']}");
+    i = double.parse(Uri.base.queryParameters['i']);
   }
   DrawSet(r-zoom/2, i-zoom/2, zoom);
 }
@@ -41,8 +50,21 @@ void CanvasClicked(e){
   DrawSet(r-zoom/2, i-zoom/2, zoom);
 }
 
+bool CanvasRightClicked(e){
+  e.preventDefault();
+  int x = e.client.x - ctx.canvas.getBoundingClientRect().left;
+  int y = e.client.y - ctx.canvas.getBoundingClientRect().top;
+  r = r-zoom/2+(zoom/canvas.width)*x;
+  i = i-zoom/2+(zoom/canvas.height)*y;
+  zoom = zoom*1.75;
+  DrawSet(r-zoom/2, i-zoom/2, zoom);
+  return false;
+}
+
 void DrawSet(double start_x, double start_y, double zoom){
   print("r: $r, i: $i, zoom: $zoom");
+  print("${Uri.base.origin}${Uri.base.path}?r=${r}&i=${i}&iter=${iterationsAmount}&c=${colorMode}&f=${complexFunction}");
+
   double ratio = canvas.width/canvas.height;
   double step_x = zoom/(canvas.width as double)*ratio;
   double step_y = zoom/(canvas.height as double);

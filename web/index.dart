@@ -19,6 +19,7 @@ void main() {
   button = querySelector("#calculatebutton");
   redrawButton = querySelector("#redrawbutton");
   canvas.onClick.listen(CanvasClicked);
+  canvas.onContextMenu.listen(CanvasRightClicked);
   button.addEventListener("click", ButtonClicked);
   redrawButton.addEventListener("click", RedrawButtonClicked);
   ctx = canvas.getContext("2d");
@@ -39,6 +40,24 @@ void CanvasClicked(e){
   element.value = zoom.toString();
   Regenerate();
   DrawSet(r-zoom/2, i-zoom/2, zoom);
+}
+
+bool CanvasRightClicked(e){
+  e.preventDefault();
+  int x = e.client.x - ctx.canvas.getBoundingClientRect().left;
+  int y = e.client.y - ctx.canvas.getBoundingClientRect().top;
+  r = r-zoom/2+(zoom/canvas.width)*x;
+  i = i-zoom/2+(zoom/canvas.height)*y;
+  InputElement element = querySelector("[name=x]");
+  element.value = r.toString();
+  element = querySelector("[name=y]");
+  element.value = i.toString();
+  zoom = zoom*1.75;
+  element = querySelector("[name=zoom]");
+  element.value = zoom.toString();
+  Regenerate();
+  DrawSet(r-zoom/2, i-zoom/2, zoom);
+  return false;
 }
 
 void Regenerate(){
@@ -101,11 +120,13 @@ void RedrawButtonClicked(e){
 }
 
 void DrawSet(double start_x, double start_y, double zoom){
+  InputElement element = querySelector("[name=iterations]");
   print("r: $r, i: $i, zoom: $zoom");
+  print("${Uri.base.origin}${Uri.base.path}?r=${r}&i=${i}&iter=${element.value}&c=${colorMode}&f=${complexFunction}");
+
   double step_x = zoom/(canvas.width as double);
   double step_y = zoom/(canvas.height as double);
 
-  InputElement element = querySelector("[name=iterations]");
   int iterations;
   if (!autoIterations){
     iterations = int.parse(element.value);
